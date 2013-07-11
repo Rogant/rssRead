@@ -13,9 +13,13 @@
     <script>
     function checkLanguage() {
       navigator.globalization.getPreferredLanguage(
-        console.log('lenguaje' + language);
-        function (language) {alert('language: ' + language.value + '\n');},
-        function () {alert('Error getting language\n');}
+        function (language) {
+            console.log('lenguaje' + language);
+            alert('language: ' + language.value + '\n');
+        },
+        function () {
+            alert('Error getting language\n');
+        }
       );
     }
     </script>
