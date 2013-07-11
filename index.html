@@ -13,6 +13,7 @@
     <script>
     function checkLanguage() {
       navigator.globalization.getPreferredLanguage(
+        console.log('lenguaje' + language);
         function (language) {alert('language: ' + language.value + '\n');},
         function () {alert('Error getting language\n');}
       );
@@ -36,6 +37,7 @@
     </div>
     <div data-role="content">
     	ggggggggggggg
+        <button onclick="checkLanguage()">Click for language</button>
     </div>
 </div>
 <div data-role="page" id="geoloc">
