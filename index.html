@@ -7,24 +7,60 @@
 
     <script src="phonegap.js"></script>
     <script src="Globalization.js"></script>
+
+    <script src="js/jquery-1.10.2.min.js"></script>
     <script src="http://10.0.1.17:8080/target/target-script-min.js#anonymous"></script>
 
     <script>
-      navigator.globalization.getPreferredLanguage(
-        function (language) {
-            console.log(language.value);
-            if(language.value == 'English'){
-                window.location = 'en/index.html';
-            }else if(language.value == 'Spanish'){
-                window.location = 'es/index.html';
+    var lenguaje = "";
+
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    function onDeviceReady() {
+        document.addEventListener("online", onOnline, false);
+        function onOnline() {
+            if(window.localStorage.getItem("onlineFlag") > 0){
+                navigator.globalization.getPreferredLanguage(
+                    function (language) {
+                        lenguaje = language.value;
+                        console.log(language.value);
+                        if(language.value == 'English'){
+                            window.location = 'en/index.html';
+                        }else if(language.value == 'Spanish'){
+                            window.location = 'es/index.html';
+                        }else{
+                            window.location = 'en/index.html';
+                        }
+                    },
+                    function () {
+                        alert('Error getting language');
+                    }
+                );
             }else{
-                window.location = 'en/index.html';
+                window.localStorage.setItem("onlineFlag", 1);
+                var db = window.openDatabase("Database", "1.0", "rssReader", 200000);
+                db.transaction(populateDB, errorCB, successCB);
             }
-        },
-        function () {
-            alert('Error getting language');
         }
-      );
+    }
+
+    function populateDB(tx) {
+
+        var url = "http://tresdiseno.com/clientes/social_paraiso/drupal/en-feed-prueba";
+        $.get(url, function(data) {
+            var xml = data,
+            xmlDoc = $.parseXML( xml ),
+            $xml = $( xmlDoc ),
+            $title = $xml.find( "Nombre" );
+
+            console.log($xml);
+        });
+
+        tx.executeSql('DROP TABLE IF EXISTS entradas');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS entradas (id unique AUTOINCREMENT, nombre, descripcion, imagen)');
+        //tx.executeSql('INSERT INTO DEMO (id, data) VALUES (1, "First row")');
+        //tx.executeSql('INSERT INTO DEMO (id, data) VALUES (2, "Second row")');
+    }
     </script>
 </head>
 <body>
