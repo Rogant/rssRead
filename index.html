@@ -54,7 +54,6 @@
             dataType: "xml",
             success:function(xml) {
                $(xml).find('node').each(function() {
-                    alert(tx);
                     console.log(tx);
                     var Nombre = $(this).find("Nombre").text(); 
                     
@@ -65,6 +64,8 @@
                     var Imagen = $(this).find("Imagen").text();
 
                     Nodos[Contador] = 'INSERT INTO entradas (id, nombre, descripcion, imagen) VALUES ('+ Contador  +', "'+ Nombre +'", "'+ Descripcion +'", "'+ Imagen +'")';
+
+                    console.log(Nodos[Contador]);
 
                     Contador++;
                });
