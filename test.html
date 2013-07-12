@@ -5,28 +5,24 @@
 </head>
 <body>
  
-<p id="someElement"></p>
-<p id="anotherElement"></p>
- 
 <script>
-var url = "http://tresdiseno.com/clientes/social_paraiso/drupal/en-feed-prueba";
-$.get(url, function(data) {
-	var xml = data,
-	xmlDoc = $.parseXML( xml ),
-	$xml = $( xmlDoc ),
-	$title = $xml.find( "Nombre" );
-
-	console.log($xml);
-});
+var url = "http://localhost/tmp/rssRead/en-feed-prueba.xml";
 
 $.ajax({
-    url: 'http://news.bbc.co.uk',
-    type: 'GET',
-    success: function(res) {
-        console.log(res);
+    url: url,
+    dataType: "xml",
+    success:function(xml) {
+       $(xml).find('node').each(function() {
+            var Nombre = $(this).find("Nombre").text(); 
+            
+            var Descripcion = $(this).find("Descripcion").text();
+            Descripcion = Descripcion.replace("<![CDATA[","");
+            Descripcion = Descripcion.replace("​]]>","");
+
+            var Imagen = $(this).find("Imagen").text();
+       });
     }
 });
 </script>
- 
 </body>
 </html>

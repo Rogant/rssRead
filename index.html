@@ -23,7 +23,7 @@
                 navigator.globalization.getPreferredLanguage(
                     function (language) {
                         lenguaje = language.value;
-                        console.log(language.value);
+                        console.log(lenguaje);
                         if(language.value == 'English'){
                             window.location = 'en/index.html';
                         }else if(language.value == 'Spanish'){
@@ -45,21 +45,29 @@
     }
 
     function populateDB(tx) {
-
-        var url = "http://tresdiseno.com/clientes/social_paraiso/drupal/en-feed-prueba";
-        $.get(url, function(data) {
-            var xml = data,
-            xmlDoc = $.parseXML( xml ),
-            $xml = $( xmlDoc ),
-            $title = $xml.find( "Nombre" );
-
-            console.log($xml);
-        });
-
         tx.executeSql('DROP TABLE IF EXISTS entradas');
         tx.executeSql('CREATE TABLE IF NOT EXISTS entradas (id unique AUTOINCREMENT, nombre, descripcion, imagen)');
-        //tx.executeSql('INSERT INTO DEMO (id, data) VALUES (1, "First row")');
-        //tx.executeSql('INSERT INTO DEMO (id, data) VALUES (2, "Second row")');
+
+        var url = "http://tresdiseno.com/clientes/social_paraiso/drupal/en-feed-prueba";
+        $.ajax({
+            url: url,
+            dataType: "xml",
+            success:function(xml) {
+               $(xml).find('node').each(function() {
+                    var Nombre = $(this).find("Nombre").text(); 
+                    
+                    var Descripcion = $(this).find("Descripcion").text();
+                    Descripcion = Descripcion.replace("<![CDATA[","");
+                    Descripcion = Descripcion.replace("​]]>","");
+
+                    var Imagen = $(this).find("Imagen").text();
+
+                    console.log(Nombre);
+                    tx.executeSql('INSERT INTO entradas (nombre, descripcion, imagen) VALUES ('+ Nombre +','+ Descripcion +','+ Imagen +',)');
+                    window.location = 'en/index.html';
+               });
+            }
+        });
     }
     </script>
 </head>
