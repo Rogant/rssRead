@@ -6,23 +6,30 @@
 <body>
  
 <script>
+var Nodos = new Array();
 var url = "http://localhost/tmp/rssRead/en-feed-prueba.xml";
 
-$.ajax({
-    url: url,
-    dataType: "xml",
-    success:function(xml) {
-       $(xml).find('node').each(function() {
-            var Nombre = $(this).find("Nombre").text(); 
-            
-            var Descripcion = $(this).find("Descripcion").text();
-            Descripcion = Descripcion.replace("<![CDATA[","");
-            Descripcion = Descripcion.replace("​]]>","");
+        var Contador = 1;
+        $.ajax({
+            url: url,
+            dataType: "xml",
+            success:function(xml) {
+               $(xml).find('node').each(function() {
+                    var Nombre = $(this).find("Nombre").text(); 
+                    
+                    var Descripcion = $(this).find("Descripcion").text();
+                    Descripcion = Descripcion.replace("<![CDATA[","");
+                    Descripcion = Descripcion.replace("​]]>","");
 
-            var Imagen = $(this).find("Imagen").text();
-       });
-    }
-});
+                    var Imagen = $(this).find("Imagen").text();
+
+                    Nodos[Contador] = 'INSERT INTO entradas (id, nombre, descripcion, imagen) VALUES ('+ Contador  +', "'+ Nombre +'", "'+ Descripcion +'", "'+ Imagen +'")';
+                    console.log(Nodos[Contador]);
+
+                    Contador++;
+                });
+            }
+        });
 </script>
 </body>
 </html>
