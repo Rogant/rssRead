@@ -44,29 +44,6 @@
                 alert('Error getting language');
             }
         );
-        url = "http://tresdiseno.com/clientes/social_paraiso/drupal/en-feed-prueba";
-        alert("url " + url);
-        var Contador = 1;
-        jQuery.ajax({
-            url: url,
-            dataType: "xml",
-            success:function(xml) {
-               jQuery(xml).find('node').each(function() {
-                    var Nombre = jQuery(this).find("Nombre").text(); 
-                    
-                    var Descripcion = jQuery(this).find("Descripcion").text();
-                    Descripcion = Descripcion.replace("<![CDATA[","");
-                    Descripcion = Descripcion.replace("​]]>","");
-
-                    var Imagen = jQuery(this).find("Imagen").text();
-
-                    Nodos[Contador] = 'INSERT INTO entradas (id, nombre, descripcion, imagen) VALUES ('+ Contador  +', "'+ Nombre +'", "'+ Descripcion +'", "'+ Imagen +'")';
-                    console.log(Nodos[Contador]);
-
-                    Contador++;
-                });
-            }
-        });
 
         if(window.localStorage.getItem("onlineFlag") > 0){
 
@@ -86,7 +63,6 @@
         //tx.executeSql(Nodos[2]);
         //tx.executeSql(Nodos[3]);
         //tx.executeSql(Nodos[4]);
-        alert(Nodos[4]);
 
         alert("redirect 2");
         window.location = redireccion;
