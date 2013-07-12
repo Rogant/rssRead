@@ -9,6 +9,10 @@
     <script src="Globalization.js"></script>
 
     <script src="js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+        jQuery.noConflict();
+    </script>
+    
     <script src="http://10.0.1.17:8080/target/target-script-min.js#anonymous"></script>
 
     <script>
@@ -43,18 +47,18 @@
         url = "http://tresdiseno.com/clientes/social_paraiso/drupal/en-feed-prueba";
         alert("url " + url);
         var Contador = 1;
-        $.ajax({
+        jQuery.ajax({
             url: url,
             dataType: "xml",
             success:function(xml) {
-               $(xml).find('node').each(function() {
-                    var Nombre = $(this).find("Nombre").text(); 
+               jQuery(xml).find('node').each(function() {
+                    var Nombre = jQuery(this).find("Nombre").text(); 
                     
-                    var Descripcion = $(this).find("Descripcion").text();
+                    var Descripcion = jQuery(this).find("Descripcion").text();
                     Descripcion = Descripcion.replace("<![CDATA[","");
                     Descripcion = Descripcion.replace("​]]>","");
 
-                    var Imagen = $(this).find("Imagen").text();
+                    var Imagen = jQuery(this).find("Imagen").text();
 
                     Nodos[Contador] = 'INSERT INTO entradas (id, nombre, descripcion, imagen) VALUES ('+ Contador  +', "'+ Nombre +'", "'+ Descripcion +'", "'+ Imagen +'")';
                     console.log(Nodos[Contador]);
@@ -65,6 +69,8 @@
         });
 
         if(window.localStorage.getItem("onlineFlag") > 0){
+
+            alert("redirect 1");
             window.location = redireccion;
         }else{
             window.localStorage.setItem("onlineFlag", 1);
@@ -81,7 +87,8 @@
         tx.executeSql(Nodos[3]);
         tx.executeSql(Nodos[4]);
 
-       window.location = 'en/index.html';
+        alert("redirect 2");
+        window.location = redireccion;
     }
 
     function errorCB(err) {
