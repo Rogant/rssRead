@@ -17,9 +17,12 @@
     document.addEventListener("deviceready", onDeviceReady, false);
 
     function onDeviceReady() {
+        alert("onDeviceReady");
         document.addEventListener("online", onOnline, false);
         function onOnline() {
+             alert("onOnline");
             if(window.localStorage.getItem("onlineFlag") > 0){
+                alert("si");
                 navigator.globalization.getPreferredLanguage(
                     function (language) {
                         lenguaje = language.value;
@@ -37,6 +40,7 @@
                     }
                 );
             }else{
+                alert("no");
                 window.localStorage.setItem("onlineFlag", 1);
                 var db = window.openDatabase("Database", "1.0", "rssReader", 200000);
                 db.transaction(populateDB, errorCB, successCB);
@@ -45,6 +49,7 @@
     }
 
     function populateDB(tx) {
+        alert("populateDB");
         tx.executeSql('DROP TABLE IF EXISTS entradas');
         tx.executeSql('CREATE TABLE IF NOT EXISTS entradas (id unique AUTOINCREMENT, nombre, descripcion, imagen)');
 
