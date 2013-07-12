@@ -15,7 +15,7 @@
     var lenguaje = "";
     var Nodos = new Array();
     var url = "http://tresdiseno.com/clientes/social_paraiso/drupal/en-feed-prueba";
-    
+
     document.addEventListener("deviceready", onDeviceReady, false);
 
     function onDeviceReady() {
@@ -51,8 +51,6 @@
                     var Imagen = $(this).find("Imagen").text();
 
                     Nodos[Contador] = 'INSERT INTO entradas (id, nombre, descripcion, imagen) VALUES ('+ Contador  +', "'+ Nombre +'", "'+ Descripcion +'", "'+ Imagen +'")';
-
-                    console.log(Nodos[Contador]);
 
                     Contador++;
                 });
