@@ -82,10 +82,10 @@
     function populateDB(tx) {
         tx.executeSql('DROP TABLE IF EXISTS entradas');
         tx.executeSql('CREATE TABLE IF NOT EXISTS entradas (id unique, nombre, descripcion, imagen)');
-        tx.executeSql(Nodos[1]);
-        tx.executeSql(Nodos[2]);
-        tx.executeSql(Nodos[3]);
-        tx.executeSql(Nodos[4]);
+        //tx.executeSql(Nodos[1]);
+        //tx.executeSql(Nodos[2]);
+        //tx.executeSql(Nodos[3]);
+        //tx.executeSql(Nodos[4]);
 
         alert("redirect 2");
         window.location = redireccion;
