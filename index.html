@@ -20,7 +20,6 @@
     document.addEventListener("deviceready", onDeviceReady, false);
 
     function onDeviceReady() {
-    alert("entro");
 
         navigator.globalization.getPreferredLanguage(
             function (language) {
@@ -41,7 +40,8 @@
                 alert('Error getting language');
             }
         );
-
+        url = "http://tresdiseno.com/clientes/social_paraiso/drupal/en-feed-prueba";
+        alert("url " + url);
         var Contador = 1;
         $.ajax({
             url: url,
