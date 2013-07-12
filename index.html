@@ -63,7 +63,7 @@
 
                     var Imagen = $(this).find("Imagen").text();
 
-                    console.log(Nombre);
+                    console.log("Nombre " + Nombre);
                     tx.executeSql('INSERT INTO entradas (nombre, descripcion, imagen) VALUES ('+ Nombre +','+ Descripcion +','+ Imagen +',)');
                     window.location = 'en/index.html';
                });
