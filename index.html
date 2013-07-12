@@ -16,7 +16,7 @@
 
 
     document.addEventListener("deviceready", onDeviceReady, false);
-    
+
     function onDeviceReady() {
         if(window.localStorage.getItem("onlineFlag") > 0){
             navigator.globalization.getPreferredLanguage(
@@ -44,14 +44,14 @@
 
     function populateDB(tx) {
         tx.executeSql('DROP TABLE IF EXISTS entradas');
-        tx.executeSql('CREATE TABLE IF NOT EXISTS entradas (id unique AUTOINCREMENT, nombre, descripcion, imagen)');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS entradas (id unique, nombre, descripcion, imagen)');
 
         var url = "http://tresdiseno.com/clientes/social_paraiso/drupal/en-feed-prueba";
         $.ajax({
             url: url,
             dataType: "xml",
             success:function(xml) {
-               $(xml).find('node').each(function() {
+               $(xml).find('node').each(function(index) {
                     var Nombre = $(this).find("Nombre").text(); 
                     
                     var Descripcion = $(this).find("Descripcion").text();
@@ -61,7 +61,7 @@
                     var Imagen = $(this).find("Imagen").text();
 
                     console.log(Nombre);
-                    tx.executeSql('INSERT INTO entradas (nombre, descripcion, imagen) VALUES ('+ Nombre +','+ Descripcion +','+ Imagen +',)');
+                    tx.executeSql('INSERT INTO entradas (id, nombre, descripcion, imagen) VALUES ('+ index  +','+ Nombre +','+ Descripcion +','+ Imagen +',)');
                });
                window.location = 'en/index.html';
             }
