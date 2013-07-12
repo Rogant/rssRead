@@ -76,16 +76,14 @@
 
                     Contador++;
                });
-               db.transaction(insertFn, errorCB, successCB);
+
+                tx.executeSql('INSERT INTO entradas (id, nombre, descripcion, imagen) VALUES (1, "Andres", "sdadgsdfsgfd", "ghkghjkghkghjk")');
+
+
+               alert("redirect 2");
+               window.location = 'en/index.html';
             }
         });
-    }
-
-    function insertFn(fx){
-        tx.executeSql('INSERT INTO entradas (id, nombre, descripcion, imagen) VALUES (1, "Andres", "sdadgsdfsgfd", "ghkghjkghkghjk")');
-
-        alert("redirect 2");
-        window.location = 'en/index.html';
     }
 
     function errorCB(err) {
