@@ -14,9 +14,10 @@
     <script>
     var lenguaje = "";
 
-    document.addEventListener("online", onOnline, false);
 
-    function onOnline() {
+    document.addEventListener("deviceready", onDeviceReady, false);
+    
+    function onDeviceReady() {
         if(window.localStorage.getItem("onlineFlag") > 0){
             navigator.globalization.getPreferredLanguage(
                 function (language) {
