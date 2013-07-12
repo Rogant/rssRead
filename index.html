@@ -14,7 +14,12 @@
     <script>
     var lenguaje = "";
 
+    document.addEventListener("deviceready", onDeviceReady, false);
     document.addEventListener("online", onOnline, false);
+
+    function onDeviceReady() {
+        alert("onDeviceReady");
+    }
 
     function onOnline() {
          alert("onOnline");
