@@ -68,14 +68,10 @@
                     console.log(Nodos[Contador]);
 
                     Contador++;
-               });
+                });
 
-               tx.executeSql(Nodos[1]);
-               tx.executeSql(Nodos[2]);
-               tx.executeSql(Nodos[3]);
-               tx.executeSql(Nodos[4]);
-
-               window.location = 'en/index.html';
+                console.log("vamos al insert");
+                db.transaction(AgregaItems, errorCB, successCB);
             }
         });
     }
@@ -86,7 +82,16 @@
 
     function successCB() {
         alert("success!");
-    }    
+    }
+
+    function AgregaItems(tx) {
+        tx.executeSql(Nodos[1]);
+        tx.executeSql(Nodos[2]);
+        tx.executeSql(Nodos[3]);
+        tx.executeSql(Nodos[4]);
+
+        window.location = 'en/index.html';
+    }
     </script>
 </head>
 <body>
