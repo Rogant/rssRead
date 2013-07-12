@@ -46,13 +46,14 @@
         tx.executeSql('DROP TABLE IF EXISTS entradas');
         tx.executeSql('CREATE TABLE IF NOT EXISTS entradas (id unique, nombre, descripcion, imagen)');
 
+        var Nodos = new Array();
         var Contador = 1;
         var url = "http://tresdiseno.com/clientes/social_paraiso/drupal/en-feed-prueba";
         $.ajax({
             url: url,
             dataType: "xml",
             success:function(xml) {
-               $(xml).find('node').each(function(index, Element, tx) {
+               $(xml).find('node').each(function() {
                     alert(tx);
                     console.log(tx);
                     var Nombre = $(this).find("Nombre").text(); 
@@ -63,12 +64,16 @@
 
                     var Imagen = $(this).find("Imagen").text();
 
-                    tx.executeSql('INSERT INTO entradas (id, nombre, descripcion, imagen) VALUES ('+ Contador  +', "'+ Nombre +'", "'+ Descripcion +'", "'+ Imagen +'")');
+                    Nodos[Contador] = 'INSERT INTO entradas (id, nombre, descripcion, imagen) VALUES ('+ Contador  +', "'+ Nombre +'", "'+ Descripcion +'", "'+ Imagen +'")';
 
                     Contador++;
-
-                    debugger;
                });
+               alert(Nodos[1]);
+               tx.executeSql(Nodos[1]);
+               tx.executeSql(Nodos[2]);
+               tx.executeSql(Nodos[3]);
+               tx.executeSql(Nodos[4]);
+
                window.location = 'en/index.html';
             }
         });
