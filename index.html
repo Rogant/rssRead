@@ -14,13 +14,13 @@
     <script>
     var lenguaje = "";
 
+    document.addEventListener("online", onOnline, false);
     document.addEventListener("deviceready", onDeviceReady, false);
 
     function onDeviceReady() {
         alert("onDeviceReady");
     }
 
-    document.addEventListener("online", onOnline, false);
     function onOnline() {
          alert("onOnline");
         if(window.localStorage.getItem("onlineFlag") > 0){
