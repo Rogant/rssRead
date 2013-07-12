@@ -43,9 +43,6 @@
     }
 
     function populateDB(tx) {
-        tx.executeSql('DROP TABLE IF EXISTS entradas');
-        tx.executeSql('CREATE TABLE IF NOT EXISTS entradas (id unique, nombre, descripcion, imagen)');
-
         var Nodos = new Array();
         var Contador = 1;
         var url = "http://tresdiseno.com/clientes/social_paraiso/drupal/en-feed-prueba";
@@ -70,11 +67,14 @@
                     Contador++;
                });
 
-               alert(Nodos[1]);
-               console.log(tx.executeSql(Nodos[1]));
-               tx.executeSql(Nodos[2]);
-               tx.executeSql(Nodos[3]);
-               tx.executeSql(Nodos[4]);
+                alert(Nodos[1]);
+                
+                tx.executeSql('DROP TABLE IF EXISTS entradas');
+                tx.executeSql('CREATE TABLE IF NOT EXISTS entradas (id unique, nombre, descripcion, imagen)');
+                tx.executeSql(Nodos[1]);
+                tx.executeSql(Nodos[2]);
+                tx.executeSql(Nodos[3]);
+                tx.executeSql(Nodos[4]);
 
                window.location = 'en/index.html';
             }
