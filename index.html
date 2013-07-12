@@ -79,7 +79,7 @@
         }
     }
 
-    function populateDB(tx) {
+    function setupTable(tx) {
         tx.executeSql('DROP TABLE IF EXISTS entradas');
         tx.executeSql('CREATE TABLE IF NOT EXISTS entradas (id unique, nombre, descripcion, imagen)');
         //tx.executeSql(Nodos[1]);
