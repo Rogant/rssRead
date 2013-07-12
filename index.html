@@ -24,9 +24,8 @@
     document.addEventListener("deviceready", onDeviceReady, false);
 
     function onDeviceReady() {
-    window.localStorage.setItem("onlineFlag", 1);
     var db = window.openDatabase("Database", "1.0", "setupTable", 200000);
-            
+
         navigator.globalization.getPreferredLanguage(
             function (language) {
                 lenguaje = language.value;
@@ -75,6 +74,7 @@
             alert("redirect 1");
             window.location = redireccion;
         }else{
+            window.localStorage.setItem("onlineFlag", 1);
             db.transaction(setupTable, errorCB, successCB);
         }
     }
