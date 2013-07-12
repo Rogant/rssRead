@@ -52,7 +52,9 @@
             url: url,
             dataType: "xml",
             success:function(xml) {
-               $(xml).find('node').each(function() {
+               $(xml).find('node').each(function(index, Element, tx) {
+                    alert(tx);
+                    console.log(tx);
                     var Nombre = $(this).find("Nombre").text(); 
                     
                     var Descripcion = $(this).find("Descripcion").text();
@@ -61,10 +63,11 @@
 
                     var Imagen = $(this).find("Imagen").text();
 
-                    console.log(index);
                     tx.executeSql('INSERT INTO entradas (id, nombre, descripcion, imagen) VALUES ('+ Contador  +', "'+ Nombre +'", "'+ Descripcion +'", "'+ Imagen +'")');
 
                     Contador++;
+
+                    debugger;
                });
                window.location = 'en/index.html';
             }
