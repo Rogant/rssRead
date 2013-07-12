@@ -18,33 +18,34 @@
 
     function onDeviceReady() {
         alert("onDeviceReady");
-        document.addEventListener("online", onOnline, false);
-        function onOnline() {
-             alert("onOnline");
-            if(window.localStorage.getItem("onlineFlag") > 0){
-                alert("si");
-                navigator.globalization.getPreferredLanguage(
-                    function (language) {
-                        lenguaje = language.value;
-                        console.log(lenguaje);
-                        if(language.value == 'English'){
-                            window.location = 'en/index.html';
-                        }else if(language.value == 'Spanish'){
-                            window.location = 'es/index.html';
-                        }else{
-                            window.location = 'en/index.html';
-                        }
-                    },
-                    function () {
-                        alert('Error getting language');
+    }
+
+    document.addEventListener("online", onOnline, false);
+    function onOnline() {
+         alert("onOnline");
+        if(window.localStorage.getItem("onlineFlag") > 0){
+            alert("si");
+            navigator.globalization.getPreferredLanguage(
+                function (language) {
+                    lenguaje = language.value;
+                    console.log(lenguaje);
+                    if(language.value == 'English'){
+                        window.location = 'en/index.html';
+                    }else if(language.value == 'Spanish'){
+                        window.location = 'es/index.html';
+                    }else{
+                        window.location = 'en/index.html';
                     }
-                );
-            }else{
-                alert("no");
-                window.localStorage.setItem("onlineFlag", 1);
-                var db = window.openDatabase("Database", "1.0", "rssReader", 200000);
-                db.transaction(populateDB, errorCB, successCB);
-            }
+                },
+                function () {
+                    alert('Error getting language');
+                }
+            );
+        }else{
+            alert("no");
+            window.localStorage.setItem("onlineFlag", 1);
+            var db = window.openDatabase("Database", "1.0", "rssReader", 200000);
+            db.transaction(populateDB, errorCB, successCB);
         }
     }
 
