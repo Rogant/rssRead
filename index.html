@@ -24,7 +24,9 @@
     document.addEventListener("deviceready", onDeviceReady, false);
 
     function onDeviceReady() {
-
+    window.localStorage.setItem("onlineFlag", 1);
+    var db = window.openDatabase("Database", "1.0", "setupTable", 200000);
+            
         navigator.globalization.getPreferredLanguage(
             function (language) {
                 lenguaje = language.value;
@@ -45,24 +47,45 @@
             }
         );
 
-        if(window.localStorage.getItem("onlineFlag") > 0){
+        url = "http://tresdiseno.com/clientes/social_paraiso/drupal/en-feed-prueba";
+        alert("url " + url);
+        var Contador = 1;
+        jQuery.ajax({
+            url: url,
+            dataType: "xml",
+            success:function(xml) {
+               jQuery(xml).find('node').each(function() {
+                    var Nombre = jQuery(this).find("Nombre").text(); 
+                    
+                    var Descripcion = jQuery(this).find("Descripcion").text();
+                    Descripcion = Descripcion.replace("<![CDATA[","");
+                    Descripcion = Descripcion.replace("​]]>","");
 
+                    var Imagen = jQuery(this).find("Imagen").text();
+
+                    Nodos[Contador] = 'INSERT INTO entradas (id, nombre, descripcion, imagen) VALUES ('+ Contador  +', "'+ Nombre +'", "'+ Descripcion +'", "'+ Imagen +'")';
+                    alert(Nodos[Contador]);
+
+                    Contador++;
+                });
+            }
+        });
+
+        if(window.localStorage.getItem("onlineFlag") > 0){
             alert("redirect 1");
             window.location = redireccion;
         }else{
-            window.localStorage.setItem("onlineFlag", 1);
-            var db = window.openDatabase("Database", "1.0", "rssReader", 200000);
-            db.transaction(populateDB, errorCB, successCB);
+            db.transaction(setupTable, errorCB, successCB);
         }
     }
 
     function populateDB(tx) {
         tx.executeSql('DROP TABLE IF EXISTS entradas');
         tx.executeSql('CREATE TABLE IF NOT EXISTS entradas (id unique, nombre, descripcion, imagen)');
-        //tx.executeSql(Nodos[1]);
-        //tx.executeSql(Nodos[2]);
-        //tx.executeSql(Nodos[3]);
-        //tx.executeSql(Nodos[4]);
+        tx.executeSql(Nodos[1]);
+        tx.executeSql(Nodos[2]);
+        tx.executeSql(Nodos[3]);
+        tx.executeSql(Nodos[4]);
 
         alert("redirect 2");
         window.location = redireccion;
