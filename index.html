@@ -54,12 +54,10 @@
 
         var Contador = 1;
 
-        alert("la url" + url);
         $.ajax({
-            url: "http://tresdiseno.com/clientes/social_paraiso/drupal/en-feed-prueba",
+            url: url,
             dataType: "xml",
             success:function(xml) {
-                alert('entro')
                 $(xml).find('node').each(function() {
                     console.log(tx);
                     var Nombre = $(this).find("Nombre").text(); 
@@ -72,7 +70,6 @@
 
                     //tx.executeSql('INSERT INTO entradas (id, nombre, descripcion, imagen) VALUES ('+ Contador  +', "'+ Nombre +'", "'+ Descripcion +'", "'+ Imagen +'")');
 
-                    alert("key: nombre"+ Contador + "valor: " + Nombre);
                     window.localStorage.setItem("nombre"+Contador, Nombre);
                     window.localStorage.setItem("descripcion"+Contador, Descripcion);
                     window.localStorage.setItem("imagen"+Contador, Imagen);

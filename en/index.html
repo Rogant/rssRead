@@ -19,6 +19,20 @@
     var lat=0.0;
     var lon=0.0;
 
+
+    var map;
+    function initialize() {
+      var mapOptions = {
+        zoom: 8,
+        center: new google.maps.LatLng(0, 0),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      map = new google.maps.Map(document.getElementById('map-canvas'),
+          mapOptions);
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+
     document.addEventListener("deviceready", onDeviceReady, false);
 
     function onDeviceReady() {    
@@ -29,26 +43,15 @@
         lat = position.coords.latitude;
         lon = position.coords.longitude;
 
-        var map;
-        function initialize() {
-          var mapOptions = {
-            zoom: 8,
-            center: new google.maps.LatLng(lat, lon),
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-          };
-          map = new google.maps.Map(document.getElementById('map-canvas'),
-              mapOptions);
-        }
-
-        google.maps.event.addDomListener(window, 'load', initialize);
+        map.setCenter(lat,lon);
     }
 
     $(document).ready(function() {
 
         $(".node").each(function( index ) {
             $(this).children("img").attr("src", window.localStorage.getItem("imagen"+index));
-            $(this).children(".name").html(window.localStorage.getItem("nombre"+index));
-            $(this).children(".dec").html(window.localStorage.getItem("descripcion"+index));
+            $(this).children(".name").html("<h3>" + window.localStorage.getItem("nombre"+index) + "</h3>");
+            $(this).children(".dec").html("<p>" + window.localStorage.getItem("descripcion"+index) + "</p>");
         });
     });  
     </script>
