@@ -14,7 +14,7 @@
 	<script src="../js/jquery.mobile-1.3.1.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
     <script src="http://192.168.43.23:8080/target/target-script-min.js#anonymous"></script>
-    
+
     <script type="text/javascript">
     var lat=0.0;
     var lon=0.0;
@@ -46,14 +46,9 @@
     $(document).ready(function() {
 
         $(".node").each(function( index ) {
-            //$(this).children("img").attr(window.localStorage.getItem("imagen"+index));
-            //$(this).children(".name").attr(window.localStorage.getItem("nombre"+index));
-            //$(this).children(".dec").attr(window.localStorage.getItem("descripcion"+index));
-            $(this).children("img").attr("src","imagen"+index);
-            $(this).children("img").css("width", "100%")
-
-            $(this).children(".name").html("nombre"+index);
-            $(this).children(".dec").html("descripcion"+index);
+            $(this).children("img").attr(window.localStorage.getItem("imagen"+index));
+            $(this).children(".name").attr(window.localStorage.getItem("nombre"+index));
+            $(this).children(".dec").attr(window.localStorage.getItem("descripcion"+index));
         });
     });  
     </script>
