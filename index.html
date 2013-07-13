@@ -54,11 +54,13 @@
 
         var Contador = 1;
         var url = url;
+        alert(url);
         $.ajax({
             url: url,
             dataType: "xml",
             success:function(xml) {
-               $(xml).find('node').each(function() {
+                alert('entro')
+                $(xml).find('node').each(function() {
                     console.log(tx);
                     var Nombre = $(this).find("Nombre").text(); 
                     
