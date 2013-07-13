@@ -46,9 +46,9 @@
     $(document).ready(function() {
 
         $(".node").each(function( index ) {
-            $(this).children("img").attr(window.localStorage.getItem("imagen"+index));
-            $(this).children(".name").attr(window.localStorage.getItem("nombre"+index));
-            $(this).children(".dec").attr(window.localStorage.getItem("descripcion"+index));
+            $(this).children("img").attr("src", window.localStorage.getItem("imagen"+index));
+            $(this).children(".name").html(window.localStorage.getItem("nombre"+index));
+            $(this).children(".dec").html(window.localStorage.getItem("descripcion"+index));
         });
     });  
     </script>
