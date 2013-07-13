@@ -23,12 +23,11 @@
     function onDeviceReady() {
         navigator.globalization.getPreferredLanguage(
             function (language) {
-                alert(language.value);
                 lenguaje = language.value;
                 if(language.value == 'English'){
                     url = 'http://tresdiseno.com/clientes/social_paraiso/drupal/en-feed-prueba';
                     redireccion = "en/index.html";
-                }else if(language.value == 'Spanish'){
+                }else if(language.value == 'español'){
                     url = 'http://tresdiseno.com/clientes/social_paraiso/drupal/es-feed-prueba';
                     redireccion = "es/index.html";
                 }else{
