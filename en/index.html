@@ -87,6 +87,12 @@
             center: myLocation,
             zoom: 15
             }); 
+
+            var placeLoc = myLocation;
+            var marker = new google.maps.Marker({
+            map: map,
+                position: myLocation
+            }); 
         }
 
         function onError() {
