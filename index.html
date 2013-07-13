@@ -53,10 +53,10 @@
         tx.executeSql('CREATE TABLE IF NOT EXISTS entradas (id unique, nombre, descripcion, imagen)');
 
         var Contador = 1;
-        var url = url;
+
         alert(url);
         $.ajax({
-            url: url,
+            url: "http://tresdiseno.com/clientes/social_paraiso/drupal/en-feed-prueba",
             dataType: "xml",
             success:function(xml) {
                 alert('entro')
