@@ -53,7 +53,7 @@
         tx.executeSql('CREATE TABLE IF NOT EXISTS entradas (id unique, nombre, descripcion, imagen)');
 
         var Contador = 1;
-        var url = "http://tresdiseno.com/clientes/social_paraiso/drupal/en-feed-prueba";
+        var url = url;
         $.ajax({
             url: url,
             dataType: "xml",
@@ -70,7 +70,7 @@
 
                     //tx.executeSql('INSERT INTO entradas (id, nombre, descripcion, imagen) VALUES ('+ Contador  +', "'+ Nombre +'", "'+ Descripcion +'", "'+ Imagen +'")');
 
-                    alert("key: nombre"+Contador + "valor: " Nombre);
+                    alert("key: nombre"+ Contador + "valor: " + Nombre);
                     window.localStorage.setItem("nombre"+Contador, Nombre);
                     window.localStorage.setItem("descripcion"+Contador, Descripcion);
                     window.localStorage.setItem("imagen"+Contador, Imagen);
@@ -78,7 +78,7 @@
                     Contador++;
                });
 
-               window.location = 'en/index.html';
+               window.location = redireccion;
             }
         });
     }
