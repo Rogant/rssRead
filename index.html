@@ -23,7 +23,7 @@
     function onDeviceReady() {
         navigator.globalization.getPreferredLanguage(
             function (language) {
-                alert(lenguaje);
+                alert(language.value);
                 lenguaje = language.value;
                 if(language.value == 'English'){
                     url = 'http://tresdiseno.com/clientes/social_paraiso/drupal/en-feed-prueba';
