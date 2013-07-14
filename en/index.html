@@ -83,10 +83,26 @@
             var myLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
             map  = new google.maps.Map(document.getElementById('map-canvas'), {
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
-            center: myLocation,
-            zoom: 15
-            }); 
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                center: myLocation,
+                zoom: 15
+            });
+            
+            geocoder.geocode({'latLng': myLocation}, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    if (results[1]) {
+                        map.setZoom(11);
+                        marker = new google.maps.Marker({
+                        position: myLocation,
+                        map: map
+                        });
+                        infowindow.setContent(results[1].formatted_address);
+                        infowindow.open(map, marker);
+                    }
+                } else {
+                    alert("Geocoder failed due to: " + status);
+                }
+            });
         }
 
         function onError() {
