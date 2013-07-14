@@ -95,9 +95,7 @@
             });
 
             geocoder.geocode({'latLng': myLocation}, function(results, status) {
-                alert("entro");
                 if (status == google.maps.GeocoderStatus.OK) {
-                    alert("entro 2");
                     if (results[1]) {
                         map.setZoom(11);
                         marker = new google.maps.Marker({
@@ -105,14 +103,14 @@
                             map: map
                         });
 
-                        alert("Esta en :" + results[0].formatted_address);
-                        alert("Esta en :" + results[1].formatted_address);
-                        alert("Esta en :" + results[2].formatted_address);
-                        alert("Esta en :" + results[3].formatted_address);
-                        alert("Esta en :" + results[4].formatted_address);
-                        alert("Esta en :" + results[5].formatted_address);
-                        alert("Esta en :" + results[6].formatted_address);
-                        alert("Esta en :" + results[7].formatted_address);
+                        $(".gAdrres").append("<p>Esta en :" + results[0].formatted_address + "</p>");
+                        $(".gAdrres").append("<p>Esta en :" + results[1].formatted_address + "</p>");
+                        $(".gAdrres").append("<p>Esta en :" + results[2].formatted_address + "</p>");
+                        $(".gAdrres").append("<p>Esta en :" + results[3].formatted_address + "</p>");
+                        $(".gAdrres").append("<p>Esta en :" + results[4].formatted_address + "</p>");
+                        $(".gAdrres").append("<p>Esta en :" + results[5].formatted_address + "</p>");
+                        $(".gAdrres").append("<p>Esta en :" + results[6].formatted_address + "</p>");
+                        $(".gAdrres").append("<p>Esta en :" + results[7].formatted_address + "</p>");
 
                         infowindow.setContent(results[1].formatted_address);
                         infowindow.open(map, marker);
