@@ -103,14 +103,11 @@
                             map: map
                         });
 
-                        $(".gAdrres").append("<p>You are in :" + results[0].formatted_address + "</p>");
-                        $(".gAdrres").append("<p>You are in :" + results[1].formatted_address + "</p>");
-                        $(".gAdrres").append("<p>You are in :" + results[2].formatted_address + "</p>");
-                        $(".gAdrres").append("<p>You are in :" + results[3].formatted_address + "</p>");
-                        $(".gAdrres").append("<p>You are in :" + results[4].formatted_address + "</p>");
-                        $(".gAdrres").append("<p>You are in :" + results[5].formatted_address + "</p>");
-                        $(".gAdrres").append("<p>You are in :" + results[6].formatted_address + "</p>");
-                        $(".gAdrres").append("<p>You are in :" + results[7].formatted_address + "</p>");
+                        $(document).ready(function() {
+                            $.each(results, function(index, value) {
+                                $(".gAdrres").append("<p><b>You are in :</b></p> <p>" + results[index].formatted_address + "</p>");
+                            });
+                        });                       
 
                         infowindow.setContent(results[1].formatted_address);
                         infowindow.open(map, marker);
